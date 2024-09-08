@@ -25,11 +25,34 @@ link_to_homedir() {
     command mkdir "$HOME/.dotbackup"
   fi
 
-  local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+  local script_dir="$(cd "$(dirname "$0")" && pwd -P)"
   local dotdir=$(dirname ${script_dir})
   if [[ "$HOME" != "$dotdir" ]];then
     for f in $dotdir/.??*; do
       [[ `basename $f` == ".git" ]] && continue
+
+      # .configディレクトリを個別に処理
+      if [[ $(basename $f) == ".config" ]]; then
+        for config_dir in $(find $f -mindepth 1 -maxdepth 1 -type d); do
+          # シンボリックリンク先のパスを作成
+          target="$HOME/${config_dir#$dotdir/}"
+          
+          # 既存のシンボリックリンクを削除
+          if [[ -L "$target" ]]; then
+            command rm -f "$target"
+          fi
+
+          # 既存のディレクトリやファイルをバックアップ
+          if [[ -e "$target" ]]; then
+            command mv "$target" "$HOME/.dotbackup"
+          fi
+
+          # ディレクトリへのシンボリックリンク作成
+          command ln -snf "$config_dir" "$target"
+        done
+        continue
+      fi
+
       if [[ -L "$HOME/`basename $f`" ]];then
         command rm -f "$HOME/`basename $f`"
       fi
@@ -58,7 +81,7 @@ while [ $# -gt 0 ];do
   shift
 done
 
-install_nvim
+#install_nvim
 link_to_homedir
 git config --global include.path "~/.gitconfig_shared"
 command echo -e "\e[1;36m Install completed!!!! \e[m"
