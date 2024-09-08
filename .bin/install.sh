@@ -6,6 +6,18 @@ helpmsg() {
   command echo ""
 }
 
+install_nvim() {
+    sudo apt update
+    sudo apt install -y nodejs npm
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+    ./nvim.appimage --appimage-extract
+    ./squashfs-root/AppRun --version
+    sudo mv squashfs-root /
+    sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+    nvim
+}
+
 link_to_homedir() {
   command echo "backup old dotfiles..."
   if [ ! -d "$HOME/.dotbackup" ];then
@@ -46,6 +58,7 @@ while [ $# -gt 0 ];do
   shift
 done
 
+install_nvim
 link_to_homedir
 git config --global include.path "~/.gitconfig_shared"
 command echo -e "\e[1;36m Install completed!!!! \e[m"
