@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
 mkdir -p $HOME/.dotbackup
-mv $HOME/.config/vivaldi/Default/Preferences 
+mv $HOME/.config/vivaldi/Default/Preferences $HOME/.dotbackup
+mv $HOME/.config/nvim $HOME/.dotbackup
 
+ln -s ./../.config/vivaldi/Default/Preferences $HOME/.config/vivaldi/Default/Preferences
+ln -s ./../.config/nvim/ $HOME/.config/nvim
 
 #set -ue
 #
