@@ -26,3 +26,7 @@ vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>', { noremap = true, silent
 -- ヤンクでクリップボードにコピー
 vim.opt.clipboard:append({ 'unnamed', 'unnamedplus' })
 
+-- Terminalモードで1回目の 'j' を通常通り 'j' として処理し，2回目の 'j' でTerminalモードを抜ける
+vim.keymap.set('t', 'j', '<Plug>j')
+vim.keymap.set('t', '<Plug>jj', '<C-\\><C-n>')
+
