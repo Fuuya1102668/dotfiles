@@ -23,15 +23,24 @@ require("lazy").setup({
             vim.cmd("colorscheme poimandres")
         end,
     },
+--    {
+--        "iamcco/markdown-preview.nvim",
+--        run = "cd app && yarn install", -- 必要な依存関係のインストール
+--        ft = "markdown", -- Markdownファイルのときにのみ読み込む
+--        config = function()
+--            vim.g.mkdp_port = '8080' -- プレビュー用のポート番号
+--            vim.g.mkdp_page_title = 'Markdown Preview' -- プレビューのページタイトル
+--            vim.g.mkdp_browser = 'firefox' -- 使用するブラウザを指定
+--        end,
+--    },
     {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install", -- 必要な依存関係のインストール
-        ft = "markdown", -- Markdownファイルのときにのみ読み込む
-        config = function()
-            vim.g.mkdp_port = '8080' -- プレビュー用のポート番号
-            vim.g.mkdp_page_title = 'Markdown Preview' -- プレビューのページタイトル
-            vim.g.mkdp_browser = 'firefox' -- 使用するブラウザを指定
-        end,
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
     },
     {
         'numToStr/Comment.nvim',
