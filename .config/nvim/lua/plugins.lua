@@ -167,7 +167,7 @@ require("lazy").setup({
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "tsserver" }, -- 必要なLSPサーバーをリスト
+                ensure_installed = { "lua_ls", "pyright", "ttserver", "cssls"}, -- 必要なLSPサーバーをリスト
             })
         end,
     },
@@ -224,24 +224,25 @@ require("lazy").setup({
                 },
             })
         end,
-        },
-        {
-        "ojroques/nvim-osc52",
-        config = function()
-            require('osc52').setup({
-                max_length = 0,        -- クリップボードにコピーする最大文字数 (0は制限なし)
-                silent = false,        -- 成功時の通知を有効化
-                trim = false,          -- 余計な空白を削除しない
-            })
-
-            -- 普通のヤンク動作でOSC52コピーを有効化
-            vim.keymap.set('n', '<leader>y', function()
-                require('osc52').copy_visual()
-            end, { desc = "Copy to clipboard using OSC52" })
-
-            vim.keymap.set('v', '<leader>y', function()
-                require('osc52').copy_visual()
-            end, { desc = "Copy to clipboard using OSC52" })
-        end,
     },
+--    {
+--        -- コピペの設定
+--        "ojroques/nvim-osc52",
+--        config = function()
+--            require('osc52').setup({
+--                max_length = 0,        -- クリップボードにコピーする最大文字数 (0は制限なし)
+--                silent = false,        -- 成功時の通知を有効化
+--                trim = false,          -- 余計な空白を削除しない
+--            })
+--
+--            -- 普通のヤンク動作でOSC52コピーを有効化
+--            vim.keymap.set('n', '<leader>y', function()
+--                require('osc52').copy_visual()
+--            end, { desc = "Copy to clipboard using OSC52" })
+--
+--            vim.keymap.set('v', '<leader>y', function()
+--                require('osc52').copy_visual()
+--            end, { desc = "Copy to clipboard using OSC52" })
+--        end,
+--    },
 })
