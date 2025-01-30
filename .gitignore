@@ -1,0 +1,15 @@
+### all ignore ###
+/*
+/.**
+
+### not ignore ###
+!/.zshrc
+!/fuya.zsh-theme
+!/.bin/
+!/.bin/**
+!/.config/
+!/.config/**
+
+!/README.md
+!/.gitignore
+

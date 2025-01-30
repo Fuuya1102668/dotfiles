@@ -23,16 +23,31 @@ require("lazy").setup({
             vim.cmd("colorscheme poimandres")
         end,
     },
+--    {
+--        "iamcco/markdown-preview.nvim",
+--        run = "cd app && yarn install", -- 必要な依存関係のインストール
+--        ft = "markdown", -- Markdownファイルのときにのみ読み込む
+--        config = function()
+--            vim.g.mkdp_port = '8080' -- プレビュー用のポート番号
+--            vim.g.mkdp_page_title = 'Markdown Preview' -- プレビューのページタイトル
+--            vim.g.mkdp_browser = 'firefox' -- 使用するブラウザを指定
+--        end,
+--    },
     {
       "iamcco/markdown-preview.nvim",
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
       build = "cd app && yarn install",
+<<<<<<< HEAD
       config = function()
         vim.g.mkdp_filetypes = { "markdown" }
         vim.g.mkdp_auto_start = 1
         vim.g.mkdp_browser = ""
         vim.g.mkdp_open_ip = "127.0.0.1"
         vim.g.mkdp_open_to_the_world = 0
+=======
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+>>>>>>> origin/main
       end,
       ft = { "markdown" },
     },
@@ -165,7 +180,7 @@ require("lazy").setup({
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "tsserver" }, -- 必要なLSPサーバーをリスト
+                ensure_installed = { "lua_ls", "pyright", "ttserver", "cssls"}, -- 必要なLSPサーバーをリスト
             })
         end,
     },
@@ -222,5 +237,25 @@ require("lazy").setup({
                 },
             })
         end,
-        },
+    },
+--    {
+--        -- コピペの設定
+--        "ojroques/nvim-osc52",
+--        config = function()
+--            require('osc52').setup({
+--                max_length = 0,        -- クリップボードにコピーする最大文字数 (0は制限なし)
+--                silent = false,        -- 成功時の通知を有効化
+--                trim = false,          -- 余計な空白を削除しない
+--            })
+--
+--            -- 普通のヤンク動作でOSC52コピーを有効化
+--            vim.keymap.set('n', '<leader>y', function()
+--                require('osc52').copy_visual()
+--            end, { desc = "Copy to clipboard using OSC52" })
+--
+--            vim.keymap.set('v', '<leader>y', function()
+--                require('osc52').copy_visual()
+--            end, { desc = "Copy to clipboard using OSC52" })
+--        end,
+--    },
 })
