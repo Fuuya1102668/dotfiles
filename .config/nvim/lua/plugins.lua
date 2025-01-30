@@ -24,14 +24,17 @@ require("lazy").setup({
         end,
     },
     {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install", -- 必要な依存関係のインストール
-        ft = "markdown", -- Markdownファイルのときにのみ読み込む
-        config = function()
-            vim.g.mkdp_port = '8080' -- プレビュー用のポート番号
-            vim.g.mkdp_page_title = 'Markdown Preview' -- プレビューのページタイトル
-            vim.g.mkdp_browser = 'firefox' -- 使用するブラウザを指定
-        end,
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      config = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+        vim.g.mkdp_auto_start = 1
+        vim.g.mkdp_browser = ""
+        vim.g.mkdp_open_ip = "127.0.0.1"
+        vim.g.mkdp_open_to_the_world = 0
+      end,
+      ft = { "markdown" },
     },
     {
         'numToStr/Comment.nvim',
@@ -143,6 +146,10 @@ require("lazy").setup({
                     follow_current_file = {
                         enable = true, -- カーソルが移動したら自動で追跡
                     },
+                },
+                window = {
+                    position = "float",
+                    width = 25,
                 },
             })
         end,

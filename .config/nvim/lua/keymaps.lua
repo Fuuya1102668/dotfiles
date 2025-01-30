@@ -1,3 +1,5 @@
+vim.g.mapleader = " "        -- リーダーキーをスペースに
+
 -- タブ（バッファ）を前後に移動する
 vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { noremap = true, silent = true }) -- 前のバッファへ移動
 vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { noremap = true, silent = true })     -- 次のバッファへ移動
@@ -29,4 +31,6 @@ vim.opt.clipboard:append({ 'unnamed', 'unnamedplus' })
 -- Terminalモードで1回目の 'j' を通常通り 'j' として処理し，2回目の 'j' でTerminalモードを抜ける
 vim.keymap.set('t', 'j', '<Plug>j')
 vim.keymap.set('t', '<Plug>jj', '<C-\\><C-n>')
+
+vim.keymap.set("n", "<leader>f", ":Neotree toggle<CR>")
 
