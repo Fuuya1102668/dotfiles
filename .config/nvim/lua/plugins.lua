@@ -37,17 +37,12 @@ require("lazy").setup({
       "iamcco/markdown-preview.nvim",
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
       build = "cd app && yarn install",
-<<<<<<< HEAD
       config = function()
         vim.g.mkdp_filetypes = { "markdown" }
         vim.g.mkdp_auto_start = 1
         vim.g.mkdp_browser = ""
         vim.g.mkdp_open_ip = "127.0.0.1"
         vim.g.mkdp_open_to_the_world = 0
-=======
-      init = function()
-        vim.g.mkdp_filetypes = { "markdown" }
->>>>>>> origin/main
       end,
       ft = { "markdown" },
     },
