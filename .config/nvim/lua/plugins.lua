@@ -175,7 +175,7 @@ require("lazy").setup({
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "ttserver", "cssls"}, -- 必要なLSPサーバーをリスト
+                ensure_installed = { "lua_ls", "pyright", "cssls"}, -- 必要なLSPサーバーをリスト
             })
         end,
     },
@@ -210,47 +210,96 @@ require("lazy").setup({
         },
         config = function()
             local cmp = require("cmp")
+            local luasnip = require("luasnip")
+
+            -- `custom_source` の正しい実装
+            local custom_source = {}
+
+            function custom_source.new()
+                local self = setmetatable({}, { __index = custom_source })
+                return self
+            end
+
+            function custom_source:complete(request, callback)
+                local items = {
+                    {
+                        label = "lead",
+                        insertText = [[
+<!-- _class: lead -->]],
+                        insertTextFormat = cmp.lsp.InsertTextFormat.Snippet,
+                        kind = cmp.lsp.CompletionItemKind.Snippet
+                    },
+                    {
+                        label = "contents",
+                        insertText = [[
+<!-- _class: contents -->
+<div class=title>
+
+## contents
+</div>
+
+<div class=content>
+
+1. listed item
+</div>]],
+                        insertTextFormat = cmp.lsp.InsertTextFormat.Snippet,
+                        kind = cmp.lsp.CompletionItemKind.Snippet
+                    },
+                    {
+                        label = "witht",
+                        insertText = [[
+<!-- _class: witht -->
+
+<div class=text>
+
+</div>]],
+                        insertTextFormat = cmp.lsp.InsertTextFormat.Snippet,
+                        kind = cmp.lsp.CompletionItemKind.Snippet
+                    },
+                    {
+                        label = "split32",
+                        insertText = [[
+<!-- _class: split32 -->
+
+<div class=left>
+
+</div>
+
+<div class=right>
+
+</div>]],
+                        insertTextFormat = cmp.lsp.InsertTextFormat.Snippet,
+                        kind = cmp.lsp.CompletionItemKind.Snippet
+                    },
+                }
+                callback(items) -- ここが重要！
+            end
+
+            -- `cmp.register_source` の代わりに `cmp.new_source` を使う
+            cmp.register_source("custom_source", custom_source.new())
+
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        require("luasnip").lsp_expand(args.body) -- LuaSnipの使用
+                        luasnip.lsp_expand(args.body) -- LuaSnipの使用
                     end,
                 },
-                mapping = {
+                mapping = cmp.mapping.preset.insert({
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Enterで補完決定
                     ["<Tab>"] = cmp.mapping.select_next_item(),
                     ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-                },
-                sources = {
+                }),
+                sources = cmp.config.sources({
                     { name = "nvim_lsp" },   -- LSPの補完ソース
                     { name = "buffer" },     -- バッファ内の補完
                     { name = "path" },       -- ファイルパスの補完
                     { name = "luasnip" },    -- スニペットの補完
-                },
+                    { name = "custom_source", priority = 1000 } -- カスタム補完ソース
+                }),
             })
         end,
-    },
---    {
---        -- コピペの設定
---        "ojroques/nvim-osc52",
---        config = function()
---            require('osc52').setup({
---                max_length = 0,        -- クリップボードにコピーする最大文字数 (0は制限なし)
---                silent = false,        -- 成功時の通知を有効化
---                trim = false,          -- 余計な空白を削除しない
---            })
---
---            -- 普通のヤンク動作でOSC52コピーを有効化
---            vim.keymap.set('n', '<leader>y', function()
---                require('osc52').copy_visual()
---            end, { desc = "Copy to clipboard using OSC52" })
---
---            vim.keymap.set('v', '<leader>y', function()
---                require('osc52').copy_visual()
---            end, { desc = "Copy to clipboard using OSC52" })
---        end,
---    },
+    }
 })
