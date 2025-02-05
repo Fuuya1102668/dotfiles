@@ -1,0 +1,22 @@
+#!/bin/bash
+
+CMD_PATH="$(readlink -f "$0")"
+CMD_DIR="$(dirname "$CMD_PATH")"
+
+while getopts dso: OPT; do
+    case $OPT in
+        d ) TYPE="document" ;;
+        s ) TYPE="slide" ;;
+        o ) RENAME="TRUE" ; NAME="$OPTARG" ;;
+    esac
+done
+
+cp -r $CMD_DIR/lualatex/$TYPE $PWD
+
+if [ "$RENAME" ]; then
+    mv $PWD/$TYPE $PWD/$NAME
+else
+    NAME=$TYPE
+fi
+
+echo "$NAMEを作成しました"
