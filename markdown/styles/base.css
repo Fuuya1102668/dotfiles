@@ -19,6 +19,7 @@
   --header-footer-font-size: 20px;
   --main-font-size: 30px;
   --sub-font-size: 20px;
+  --code-font-size: 25px;
   --lead-h1-font-size: 70px;
   --lead-h2-font-size: 20px;
   --font-weight-light: 200;
@@ -83,7 +84,6 @@ section.contents {
     grid-template-areas: "title content";
     align-items: center;
 }
-
 section.contents .title, 
 section.split .content {
     height: 100%;
@@ -104,7 +104,6 @@ section.contents .content {
 }
 
 section.split32 {
-    padding: 30px 40px 10px 40px;
     display: grid;
     grid-template-rows: auto 1fr; /* h1 を上部に固定し、残りを分割 */
     grid-template-columns: 3fr 2fr; /* 左右均等に分割 */
@@ -114,7 +113,6 @@ section.split32 {
     align-items: center;
     gap: 20px; /* 左右の間に20pxのスペース */
 }
-
 section.split32 .left, 
 section.split32 .right {
     height: 100%;
@@ -141,7 +139,6 @@ section.split32 .right img {
 }
 
 section.witht {
-    padding: 30px 40px 10px 40px;
     display: grid;
     grid-template-rows: auto 1fr; /* h1 を上部に固定し、残りを分割 */
     grid-template-columns: 1fr 1fr; /* 左右均等に分割 */
@@ -150,7 +147,6 @@ section.witht {
         "text text";
     align-items: center;
 }
-
 section.witht h1 {
     grid-area: header; /* h1 を上部に配置 */
 }
@@ -192,6 +188,7 @@ section p img {
 section pre {
   background-color: var(--background-code);
   border-radius: var(--normal-border-radius);
+  font-size: var(--code-font-size);
   border: var(--black) 1px solid;
 }
 
