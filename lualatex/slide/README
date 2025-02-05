@@ -1,0 +1,44 @@
+コマンド
+platex
+.texファイルをコンパイルして.divファイルを作成する．
+
+dvipdfmx
+.dviファイルを.pdfファイルにする．
+
+evince
+作成したpdfを閲覧する．
+
+図の挿入
+\begin{figure}[ht]
+	\centering
+	\includegraphics{filepath}
+	\caption{captionname}
+	\label{labelname}
+\end{figure}
+
+\begin{figure}
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics{filepath}
+		\caption{captionname}
+		\label{labelname}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\linewidth}
+		\
+		\
+		\
+		\
+	\end{minipage}
+\end{figure}
+
+コードの挿入
+\lstinputlisting[caption=captionname,label=labelname]{codepath}
+
+ヘッダーとフッター
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+	\lhead{lest header}
+	\rhead{right header}
+	\cfoot{center footer}
+

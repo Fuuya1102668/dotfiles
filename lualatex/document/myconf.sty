@@ -1,0 +1,40 @@
+% http://d.hatena.ne.jp/gp98/20090919/1253367749
+\makeatletter                   % プリアンブルで定義開始
+
+% 表示文字列を"図"から"Figure"へ
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table.}
+
+% 図番号を"<節番号>.<図番号>" へ
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+% 節が進むごとに図番号をリセットする
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\@addtoreset{equation}{section}
+
+\makeatother % プリアンブルで定義終了
+
+% マクロ
+\newcommand{\refSec}[1]   {\ref{#1}章}
+\newcommand{\refApd}[1]   {\ref{#1}}
+\newcommand{\refSsec}[1]  {\ref{#1}節}
+\newcommand{\refSssec}[1] {\ref{#1}項}
+\newcommand{\refFig}[1]   {\figurename\ref{#1}}
+\newcommand{\refTable}[1] {\tablename\ref{#1}}
+\newcommand{\refEq}[1]    {Eq.\ref{#1}}
+
+\newcommand{\myVec}[1] {\bm{#1}}
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics#Fractions_and_Binomials
+\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+\newcommand{\mySubsection}[1] {
+    \subsection{#1}
+    \vspace{-5pt}
+}
+\newcommand{\mySubsubsection}[1] {
+    \vspace{-2pt}
+    \subsubsection{#1}
+}
+\newcommand{\mathUnit}[1] {\,\mathrm{[#1]}}

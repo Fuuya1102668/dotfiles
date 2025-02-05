@@ -1,0 +1,72 @@
+\documentclass[10pt,a4paper]{ltjsarticle}           % for LuaTeX
+
+\usepackage{titlesec}
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+
+\usepackage{myconf}
+
+\usepackage{amsmath}
+\usepackage{bm}                                 % for vector
+\usepackage{txfonts}                            % for \coloneqq \eqqcolon
+\usepackage{here}
+\usepackage{fancyhdr}
+\usepackage{setspace}                           % for spacing環境
+\usepackage{ulem}                               % for \sout{} 取り消し線
+\usepackage{url}
+% http://osksn2.hep.sci.osaka-u.ac.jp/~naga/miscellaneous/tex/tex-tips3.html
+\usepackage{booktabs}                           % for \toprule \midrule \bottomrule
+% \usepackage{latexsym}
+\usepackage[luatex]{graphicx}                   % LuaTeX
+\usepackage[absolute,overlay]{textpos}          % for textblock absoluteで絶対位置指定
+% \usepackage{array}                            % 表幅固定
+\usepackage{multirow}                           % 表で行結合
+\usepackage[table]{xcolor}                      % for \arrayrulecolor{yellow}\midrule ？
+\usepackage[unicode=true,hidelinks,bookmarksnumbered=true,bookmarksdepth=subsubsection]{hyperref}
+% ソースコード用
+\usepackage{listings}
+\lstset{%
+  language={java}, % 載せるソースコードの言語を指定する
+  basicstyle={\small\ttfamily}, % 通常のソースのフォントを設定
+  commentstyle={\small\bfseries\color[rgb]{0,0.5,0}}, % コメントのフォントを設定
+  keywordstyle={\small\ttfamily\color[rgb]{0,0,1}}, % 予約語のフォントを設定
+  ndkeywordstyle={\small}, % keywordstyle以外に定義されている予約語のフォントを設定
+  frame={tb}, % 実線で描く枠の位置指定
+  breaklines=true, % 自動改行の有無
+  columns=[l]{fullflexible},% 文字間の余白
+  numbers=left, % 行番号の位置
+  xrightmargin=0\zw, % 右側の余白
+  xleftmargin=1\zw, % 左側の余白
+  numberstyle={\scriptsize}, % 行番号のフォント
+  stepnumber=1, % 行番号の刻み幅
+  numbersep=2\zw, % 行番号とソースコードの余白
+  lineskip=-0.5ex, % 行間
+}
+\usepackage{comment}
+\usepackage{here}
+\usepackage{lastpage}
+\cfoot{\thepage~/~\pageref{LastPage}}
+\usepackage{layout}
+% フォント調整
+% \newfontfamily{\ttconsolas}{Consolas}
+% \usepackage{fontspec}
+% \usepackage[⟨options⟩]{luatexja-fontspec}
+\usepackage{luatexja-fontspec}
+% \newfontfamily\fontConsolas{Consolas}
+
+% コンパイル時に図をとばす
+% http://blog.livedoor.jp/tmako123-programming/archives/42210596.html
+\newif\iffigure
+\figurefalse
+\figuretrue
+
+\begin{document}
+\title{title}
+\author{3EP3-10 岩島楓也}
+\date{\today}
+\maketitle
+
+\section{sodauhfgo}
+
+\end{document}
+

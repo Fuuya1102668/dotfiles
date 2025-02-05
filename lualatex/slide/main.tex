@@ -1,0 +1,34 @@
+\documentclass[unicode,aspectratio=169]{beamer} % スライドのサイズを16:9にする
+\usepackage[no-math,deluxe,expert,haranoaji]{luatexja-preset}
+\usepackage[most]{tcolorbox}
+\usepackage{framed}
+\usepackage{multicol}
+\usepackage[normalem]{ulem} 
+\usepackage{fancybox}
+\usepackage{ascmac}
+\usepackage{amsmath}
+
+\usepackage{myconf}
+
+\usetheme[block=fill]{metropolis}
+
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Normal}
+\setsansfont{HaranoAjiGothic-Normal}
+
+\title{title}
+\author{author}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{タイトル}
+    スライド
+    \begin{block}{ブロック}
+        block
+    \end{block}
+\end{frame}
+
+\end{document}
