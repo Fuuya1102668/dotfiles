@@ -9,6 +9,10 @@
 !/.bin/**
 !/.config/
 !/.config/**
+!/lualatex
+!/lualatex/**
+!/markdown
+!/markdown/**
 
 !/README.md
 !/.gitignore
