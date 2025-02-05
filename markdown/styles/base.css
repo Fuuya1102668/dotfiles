@@ -1,0 +1,217 @@
+/* @theme base */
+@import "gaia";
+
+:root {
+  --main-dark: #003;
+  --main-normal: #004;
+  --main-light: #004;
+  --background-dark: #004;
+  --background-normal: #004;
+  --background-light: #fff;
+  --background-code: #fff;
+  --black: #444;
+  --gray: #aaa;
+  --white: #ccc;
+  --h1-font-size: 50px;
+  --h2-font-size: 45px;
+  --h3-font-size: 40px;
+  --h4-font-size: 35px;
+  --header-footer-font-size: 20px;
+  --main-font-size: 30px;
+  --sub-font-size: 20px;
+  --lead-h1-font-size: 70px;
+  --lead-h2-font-size: 20px;
+  --font-weight-light: 200;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --normal-border-radius: 5px;
+}
+
+section {
+    padding: 30px 40px 10px 40px;
+    background-color: var(--background-light);
+    font-size: var(--main-font-size);
+    font-weight: var(--font-weight-normal);
+    font-family: sans-serif;
+    /* font-family: HackGen35 Console NF, sans-serif; */
+    color: var(--black);
+}
+
+header {
+    width: 100%;
+    color: var(--black);
+    font-size: var(--header-footer-font-size);
+    height: 50px;
+    text-align: right; /* 右寄せ */
+}
+
+header img {
+    max-height: 100%; /* ヘッダーの高さにフィット */
+    max-width: 150px; /* 画像の最大横幅を制限 */
+    object-fit: contain; /* アスペクト比を維持して画像を縮小 */
+    margin-left: 10px; /* 画像と他のコンテンツとの間に余白を追加 */
+}
+
+footer {
+  width: 100%;
+  color: var(--black);
+  text-align: left;
+  padding-bottom: 0;
+  font-size: var(--header-footer-font-size);
+  height: 50px;
+}
+
+section strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--black);
+}
+
+section.lead h1 {
+  font-size: var(--lead-h1-font-size);
+  margin: 0 auto 100px;
+  border: 0;
+}
+section.lead h2 {
+  font-size: var(--lead-h2-font-size);
+  margin: 0 auto 100px;
+}
+
+section.contents {
+    padding: 0px 0px 0px 0px;
+    display: grid;
+    grid-template-columns: var(--grid-left, 2fr) var(--grid-right, 3fr);
+    grid-template-areas: "title content";
+    align-items: center;
+}
+
+section.contents .title, 
+section.split .content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+section.contents .title { 
+    grid-area: title;
+    justify-content: center;
+    background-color: var(--background-normal);
+    color: var(--white);
+}
+section.contents .content { 
+    grid-area: content;
+    text-align: left;
+    padding-left: 100px;
+    color: var(--gray);
+}
+
+section.split32 {
+    padding: 30px 40px 10px 40px;
+    display: grid;
+    grid-template-rows: auto 1fr; /* h1 を上部に固定し、残りを分割 */
+    grid-template-columns: 3fr 2fr; /* 左右均等に分割 */
+    grid-template-areas: 
+        "header header"
+        "left right"; /* グリッド領域を定義 */
+    align-items: center;
+    gap: 20px; /* 左右の間に20pxのスペース */
+}
+
+section.split32 .left, 
+section.split32 .right {
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* 縦方向に配置 */
+    justify-content: center; /* 水平方向の中央揃え */
+    color: var(--black);
+}
+section.split32 .left{ 
+    grid-area: left;
+}
+section.split32 .right { 
+    grid-area: right;
+    font-size: var(--sub-font-size);
+}
+section.split32 h1 {
+    grid-area: header; /* h1 を上部に配置 */
+}
+section.split32 .left img,
+section.split32 .right img {
+    max-width: 100%; /* 横幅をエリア内で最大幅に制限 */
+    max-height: 100%; /* 高さもエリア内で制限 */
+    object-fit: contain; /* アスペクト比を維持して画像を縮小 */
+}
+
+section.witht {
+    padding: 30px 40px 10px 40px;
+    display: grid;
+    grid-template-rows: auto 1fr; /* h1 を上部に固定し、残りを分割 */
+    grid-template-columns: 1fr 1fr; /* 左右均等に分割 */
+    grid-template-areas: 
+        "header header"
+        "text text";
+    align-items: center;
+}
+
+section.witht h1 {
+    grid-area: header; /* h1 を上部に配置 */
+}
+section.witht .text {
+    grid-area: text;
+    display: flex; /* フレックスボックスを適用 */
+    flex-direction: column; /* 縦方向のレイアウト */
+    justify-content: center; /* 水平方向の中央揃え */
+}
+
+section h1 {
+    font-size: var(--h1-font-size);
+    color: var(--black);
+    border-bottom: 1px solid var(--gray);
+    margin-bottom: 10px;
+}
+
+section h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
+section h3 {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
+section h4 {
+  font-size: var(--h4-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
+section p img {
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--normal-border-radius);
+}
+
+section pre {
+  background-color: var(--background-code);
+  border-radius: var(--normal-border-radius);
+  border: var(--black) 1px solid;
+}
+
+section code.language-txt {
+  color: var(--black);
+}
+
+section code {
+  color: var(--black);
+  background-color: var(--background-code);
+  padding: 4px 8px 4px;
+  border-radius: 4px;
+}
+
+section ul,
+ol {
+  padding-left: 40px;
+}
+
+section::after {
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
