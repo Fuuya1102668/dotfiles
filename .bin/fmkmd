@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CMD_PATH="$(readlink -f "$0")"
+CMD_DIR="$(dirname "$CMD_PATH")"
+TYPE="markdown"
+
+while getopts o: OPT; do
+    case $OPT in
+        o ) RENAME="TRUE" ; NAME="$OPTARG" ;;
+    esac
+done
+
+cp -r $CMD_DIR/../$TYPE $PWD
+
+if [ "$RENAME" ]; then
+    mv $PWD/$TYPE $PWD/$NAME
+else
+    NAME=$TYPE
+fi
+
+echo "$NAMEを作成しました"
