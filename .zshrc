@@ -99,3 +99,19 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# adbの環境変数の登録
+export ADB_MDNS_OPENSCREEN=1
+export ANDROID_SDK=$HOME/Android/Sdk/
+export ANDROID_HOME=$HOME/Android/Sdk/
+export PATH=$PATH:$ANDROID_SDK/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_SDK/cmdline-tools/bin
+export PATH=$PATH:$ANDROID_SDK/platform-tools 
+export PATH=$PATH:$ANDROID_SDK/tools/bin 
+
+# voltaの登録
+export PATH="$HOME/.volta/bin:$PATH"
+
+if [ -f ~/.apikeys ]; then
+  source ~/.apikeys
+fi

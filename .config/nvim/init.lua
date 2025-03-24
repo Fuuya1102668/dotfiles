@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+
 require("keymaps")
 require("options")
 require("plugins")
