@@ -3,10 +3,19 @@ dotfiles
 
 ### nvimの設定
 ```
-ln -s $PWD/.config/nvim/ $HOME/.config/nvim
+$ ln -s $PWD/.config/nvim/ $HOME/.config/nvim
 ```
+
+### zshの設定
+```
+$ cp .zshrc ~/.
+$ cp fuya.zsh-theme ~/.oh-my-zsh/themes/
+$ source ~/.zshrc
+```
+もしかしたらフォントを入れなきゃいけないかも
+
 ### シンボリックリンクを通してコマンドを使う
 ```
-sudo ln -si ~/dotfiles/.bin/fmktex /usr/local/bin
-sudo ln -si ~/dotfiles/.bin/fmkmd /usr/local/bin
+$ sudo ln -si ~/dotfiles/.bin/fmktex /usr/local/bin
+$ sudo ln -si ~/dotfiles/.bin/fmkmd /usr/local/bin
 ```
