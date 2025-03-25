@@ -17,3 +17,6 @@
 !/README.md
 !/.gitignore
 
+### ignore ##
+.config/nvim/lazy-lock.json
+
