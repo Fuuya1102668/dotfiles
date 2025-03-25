@@ -112,6 +112,9 @@ export PATH=$PATH:$ANDROID_SDK/tools/bin
 # voltaの登録
 export PATH="$HOME/.volta/bin:$PATH"
 
+# uvの登録
+export PATH="$HOME/.local/bin:$PATH"
+
 if [ -f ~/.apikeys ]; then
   source ~/.apikeys
 fi
