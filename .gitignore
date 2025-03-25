@@ -5,6 +5,7 @@
 ### not ignore ###
 !/.zshrc
 !/fuya.zsh-theme
+!/fuya-docker.zsh-theme
 !/.bin/
 !/.bin/**
 !/.config/
