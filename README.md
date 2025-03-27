@@ -26,7 +26,10 @@ $ ln -s $PWD/.p10k.zsh ~/
 $ cd 
 $ source ~/.zshrc
 ```
-もしかしたらフォントを入れなきゃいけないかも
+##### もしかしたらフォントを入れなきゃいけないかも
+```
+$ curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+```
 
 $ cp fuya.zsh-theme ~/.oh-my-zsh/themes/
 
