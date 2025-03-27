@@ -20,8 +20,9 @@ $ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM
 
 #### 設定ファイルのコピー
 ```
-$ ln -s $PWD/.zshrc ~/.
-$ ln -s $PWD/.p10k.zsh ~/.
+$ mv ~/.zshrc ~/.zshrc.backup
+$ ln -s $PWD/.zshrc ~/
+$ ln -s $PWD/.p10k.zsh ~/
 $ cd 
 $ source ~/.zshrc
 ```
