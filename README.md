@@ -7,12 +7,27 @@ $ ln -s $PWD/.config/nvim/ $HOME/.config/nvim
 ```
 
 ### zshの設定
+
+#### oh-my-zshのinstall
 ```
-$ cp .zshrc ~/.
-$ cp fuya.zsh-theme ~/.oh-my-zsh/themes/
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+#### Powerlevel10kのinstall
+```
+$ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+```
+
+#### 設定ファイルのコピー
+```
+$ ln -s $PWD/.zshrc ~/.
+$ ln -s $PWD/.p10k.zsh ~/.
+$ cd 
 $ source ~/.zshrc
 ```
 もしかしたらフォントを入れなきゃいけないかも
+
+$ cp fuya.zsh-theme ~/.oh-my-zsh/themes/
 
 ### シンボリックリンクを通してコマンドを使う
 ```
