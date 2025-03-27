@@ -4,6 +4,7 @@
 
 ### not ignore ###
 !/.zshrc
+!/.p10k.zsh
 !/fuya.zsh-theme
 !/fuya-docker.zsh-theme
 !/.bin/
