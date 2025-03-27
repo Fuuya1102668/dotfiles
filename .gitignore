@@ -15,7 +15,7 @@
 !/lualatex/**
 !/markdown
 !/markdown/**
-!/'MesloLGS NF Regular.ttf'
+!/MesloLGS NF Regular.ttf
 
 !/README.md
 !/.gitignore
