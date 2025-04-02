@@ -220,6 +220,12 @@ require("lazy").setup({
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
+        end,
+    },
+    {
+        "yetone/avante.nvim",
+        config = function()
+            require("avante").setup({})
 
             -- `custom_source` の正しい実装
             local custom_source = {}
