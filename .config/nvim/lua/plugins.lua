@@ -225,6 +225,7 @@ require("lazy").setup({
     {
         "yetone/avante.nvim",
         config = function()
+            local cmp = require("cmp")
             require("avante").setup({})
 
             -- `custom_source` の正しい実装
