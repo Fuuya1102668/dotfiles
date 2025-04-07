@@ -12,17 +12,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {
-        'olivercederborg/poimandres.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require('poimandres').setup {
-                disable_background = true, -- disable background
-           }
-            vim.cmd("colorscheme poimandres")
-        end,
-    },
+    -- {
+    --     'olivercederborg/poimandres.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require('poimandres').setup {
+    --             disable_background = true, -- disable background
+    --        }
+    --         vim.cmd("colorscheme poimandres")
+    --     end,
+    -- },
 --    {
 --        "iamcco/markdown-preview.nvim",
 --        run = "cd app && yarn install", -- 必要な依存関係のインストール
@@ -257,14 +257,6 @@ require("lazy").setup({
             },
           },
         },
-        {
-          -- Make sure to set this up properly if you have lazy=true
-          'MeanderingProgrammer/render-markdown.nvim',
-          opts = {
-            file_types = { "markdown", "Avante" },
-          },
-          ft = { "markdown", "Avante" },
-        },
       },
     },
     {
@@ -369,5 +361,71 @@ require("lazy").setup({
                 }),
             })
         end,
-    }
+    },
+    {
+        "tanvirtin/monokai.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("monokai").setup({
+                disable_background = true, -- disable background
+            })
+            vim.cmd.colorscheme("monokai")
+            -- vim.api.nvim_set_hl(0, "Normal",      { bg = "NONE" })
+            -- vim.api.nvim_set_hl(0, "NormalNC",    { bg = "NONE" })
+            -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+            -- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
+            -- vim.api.nvim_set_hl(0, "SignColumn",  { bg = "NONE" })
+            -- vim.api.nvim_set_hl(0, "VertSplit",   { bg = "NONE" })
+        end
+    },
+    {
+      -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
+        ---@module 'render-markdown'
+        -- vim.api.nvim_set_hl(0, "RenderMarkdownH1", {
+        --     fg = "#000000",  -- 文字色（赤系の例）
+        --     bg = "#000000"
+        -- }),
+        -- vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", {
+        --     fg = "#000000",  -- 文字色（赤系の例）
+        --     bg = "#000000"
+        -- }),
+        -- vim.api.nvim_set_hl(0, "RenderMarkdownCode", {
+        --     bg = "#000000",  -- 背景色
+        --     fg = "#88c0d0",  -- 文字色
+        -- }),
+        config = function()
+            require("render-markdown").setup({
+            heading = {
+                border = true,
+                width = 'block',
+                left_pad = 2,
+                right_pad = 4,
+            },
+            paragraph = {
+                enabled = true,
+                render_modes = false,
+                left_margin = 0,
+                min_width = 0,
+            },
+            code = {
+                width = 'block',
+                left_pad = 2,
+                right_pad = 4,
+            },
+            dash = {
+                enabled = true,
+            },
+            indent = {
+                enabled = true
+            },
+        })
+        end,
+        opts = {
+            file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+    },
 })
