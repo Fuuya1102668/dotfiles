@@ -5,14 +5,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
--- init.lua
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        -- Neovim 起動時に neo-tree を自動で開く
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
-    end,
-})
-
 
 require("keymaps")
 require("options")

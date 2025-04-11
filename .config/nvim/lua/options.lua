@@ -20,9 +20,15 @@ vim.opt.cursorline = true
 -- 検索している文字に色をつける
 vim.opt.hlsearch = true
 
+-- ヤンクでクリップボードにコピー
+vim.opt.clipboard:append({ 'unnamed', 'unnamedplus' })
+
 -- jjでinsertからnormalへ
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { noremap = true, silent = true })
 
+-- カーソルのある行は絶対行で，ほかは相対行
+vim.opt.number = true
+vim.opt.relativenumber = true
 -- init.lua
 -- vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
 

@@ -12,40 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- {
-    --     'olivercederborg/poimandres.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         require('poimandres').setup {
-    --             disable_background = true, -- disable background
-    --        }
-    --         vim.cmd("colorscheme poimandres")
-    --     end,
-    -- },
---    {
---        "iamcco/markdown-preview.nvim",
---        run = "cd app && yarn install", -- 必要な依存関係のインストール
---        ft = "markdown", -- Markdownファイルのときにのみ読み込む
---        config = function()
---            vim.g.mkdp_port = '8080' -- プレビュー用のポート番号
---            vim.g.mkdp_page_title = 'Markdown Preview' -- プレビューのページタイトル
---            vim.g.mkdp_browser = 'firefox' -- 使用するブラウザを指定
---        end,
---    },
-    {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && yarn install",
-      config = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-        vim.g.mkdp_auto_start = 1
-        vim.g.mkdp_browser = ""
-        vim.g.mkdp_open_ip = "127.0.0.1"
-        vim.g.mkdp_open_to_the_world = 0
-      end,
-      ft = { "markdown" },
-    },
     {
         'numToStr/Comment.nvim',
         config = function()
@@ -209,55 +175,83 @@ require("lazy").setup({
         end,
     },
     {
-      "yetone/avante.nvim",
-      event = "VeryLazy",
-      version = false, -- Never set this value to "*"! Never!
-      opts = {
-        -- add any opts here
-        -- for example
-        provider = "openai",
-        openai = {
-          endpoint = "https://api.openai.com/v1",
-          model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-          timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-          temperature = 0,
-          max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-          --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-        },
-      },
-      -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-      build = "make",
-      -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-        "stevearc/dressing.nvim",
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        --- The below dependencies are optional,
-        "echasnovski/mini.pick", -- for file_selector provider mini.pick
-        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-        "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-        "ibhagwan/fzf-lua", -- for file_selector provider fzf
-        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua", -- for providers='copilot'
-        {
-          -- support for image pasting
-          "HakonHarnes/img-clip.nvim",
-          event = "VeryLazy",
-          opts = {
-            -- recommended settings
-            default = {
-              embed_image_as_base64 = false,
-              prompt_for_file_name = false,
-              drag_and_drop = {
-                insert_mode = true,
-              },
-              -- required for Windows users
-              use_absolute_path = true,
+        "yetone/avante.nvim",
+        event = "VeryLazy",
+        version = false, -- Never set this value to "*"! Never!
+        opts = {
+            -- add any opts here
+            -- for example
+            provider = "openai",
+            openai = {
+                endpoint = "https://api.openai.com/v1",
+                model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+                timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+                temperature = 0,
+                max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+                --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
             },
-          },
         },
-      },
+        -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+        build = "make",
+        -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "stevearc/dressing.nvim",
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            --- The below dependencies are optional,
+            "echasnovski/mini.pick", -- for file_selector provider mini.pick
+            "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+            "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+            "ibhagwan/fzf-lua", -- for file_selector provider fzf
+            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            {
+                -- support for image pasting
+                "HakonHarnes/img-clip.nvim",
+                event = "VeryLazy",
+                opts = {
+                    -- recommended settings
+                    default = {
+                        embed_image_as_base64 = false,
+                        prompt_for_file_name = false,
+                        drag_and_drop = {
+                            insert_mode = true,
+                        },
+                        -- required for Windows users
+                        use_absolute_path = true,
+                    },
+                },
+            },
+        },
+        config = function ()
+            require("avante").setup({
+                -- system_prompt as function ensures LLM always has latest MCP server state
+                -- This is evaluated for every message, even in existing chats
+                system_prompt = function()
+                local hub = require("mcphub").get_hub_instance()
+                return hub:get_active_servers_prompt()
+                end,
+                -- Using function prevents requiring mcphub before it's loaded
+                custom_tools = function()
+                return {
+                    require("mcphub.extensions.avante").mcp_tool(),
+                }
+                end,
+                disabled_tools = {
+                    "list_files",    -- Built-in file operations
+                    "search_files",
+                    "read_file",
+                    "create_file",
+                    "rename_file",
+                    "delete_file",
+                    "create_dir",
+                    "rename_dir",
+                    "delete_dir",
+                    "bash",         -- Built-in terminal access
+                },
+            })
+        end,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -380,22 +374,8 @@ require("lazy").setup({
         end
     },
     {
-      -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
-        ---@module 'render-markdown'
-        -- vim.api.nvim_set_hl(0, "RenderMarkdownH1", {
-        --     fg = "#000000",  -- 文字色（赤系の例）
-        --     bg = "#000000"
-        -- }),
-        -- vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", {
-        --     fg = "#000000",  -- 文字色（赤系の例）
-        --     bg = "#000000"
-        -- }),
-        -- vim.api.nvim_set_hl(0, "RenderMarkdownCode", {
-        --     bg = "#000000",  -- 背景色
-        --     fg = "#88c0d0",  -- 文字色
-        -- }),
         config = function()
             require("render-markdown").setup({
             heading = {
@@ -428,4 +408,21 @@ require("lazy").setup({
         },
         ft = { "markdown", "Avante" },
     },
+})
+    {
+        "ravitemer/mcphub.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+        },
+        -- comment the following line to ensure hub will be ready at the earliest
+        cmd = "MCPHub",  -- lazy load by default
+        build = "npm install -g mcp-hub@latest",  -- Installs required mcp-hub npm module
+        -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
+        -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+        config = function()
+            require("mcphub").setup({
+                auto_approve = false,
+            })
+        end,
+    }
 })
