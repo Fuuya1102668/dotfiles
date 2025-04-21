@@ -4,6 +4,7 @@ dotfiles
 ### nvimの設定
 ```
 $ ln -s $PWD/.config/nvim/ $HOME/.config/nvim
+$ ln -s $PWD/.config/mcphub/ $HOME/.config/mcphub/
 ```
 
 ### zshの設定
