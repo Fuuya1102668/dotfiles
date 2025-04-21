@@ -408,7 +408,6 @@ require("lazy").setup({
         },
         ft = { "markdown", "Avante" },
     },
-})
     {
         "ravitemer/mcphub.nvim",
         dependencies = {
