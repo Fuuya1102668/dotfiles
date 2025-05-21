@@ -205,7 +205,12 @@ section code {
 
 section ul,
 ol {
-  padding-left: 40px;
+  margin-top: 0.0em;
+  margin-bottom: 0.0em;
+}
+
+section li {
+  line-height: 1.3;  /* 文字同士の縦幅も合わせて調整 */
 }
 
 section::after {
