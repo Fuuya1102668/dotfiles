@@ -123,6 +123,10 @@ export PATH="$HOME/.volta/bin:$PATH"
 # uvの登録
 export PATH="$HOME/.local/bin:$PATH"
 
+if [ -f ~/.myenv ]; then
+  source ~/.myenv
+fi
+
 if [ -f ~/.apikeys ]; then
   source ~/.apikeys
 fi
