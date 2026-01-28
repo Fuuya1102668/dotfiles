@@ -150,28 +150,8 @@ require("lazy").setup({
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "cssls"}, -- 必要なLSPサーバーをリスト
+                ensure_installed = { "lua_ls", "pyright", "cssls", "clangd"}, -- 必要なLSPサーバーをリスト
             })
-        end,
-    },
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-            local lspconfig = require("lspconfig")
-            local on_attach = function (client, bufnr)
-            end
-            lspconfig.lua_ls.setup {
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                        globals = {"vim"},
-                        },
-                    },
-                },
-                on_attach = on_attach,
-            }
-            lspconfig.pyright.setup {on_attach = on_attach}
-            lspconfig.clangd.setup {on_attach = on_attach}
         end,
     },
     {
