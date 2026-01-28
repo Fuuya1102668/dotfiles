@@ -4,9 +4,22 @@ CMD_PATH="$(readlink -f "$0")"
 CMD_DIR="$(dirname "$CMD_PATH")"
 TYPE="markdown"
 
-while getopts o: OPT; do
+usage() {
+  cat >&2 <<EOF
+使い方: $(basename "$0") [-o NAME] [-h]
+
+  -o NAME   作成後に NAME へリネームするのだ
+  -h        このヘルプを表示するのだ
+EOF
+  exit 2
+}
+
+while getopts ":o:h" OPT; do
     case $OPT in
         o ) RENAME="TRUE" ; NAME="$OPTARG" ;;
+        h ) usage ;;
+        : ) echo "オプション -$OPTARG には引数が必要なのだ" >&2; usage ;;
+        \? ) "不明なオプション: -$OPT" >&2; usage ;;
     esac
 done
 
